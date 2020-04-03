@@ -1,7 +1,7 @@
 from ROOT import *
 from DataFormats.FWLite import Events, Handle
 
-inputfiles=["reco_test.root"]
+inputfiles=["Condor/reco_test.root"]
 
 # create handle outside of loop
 handle1  = Handle ('vector<reco::GenJet>')

@@ -1,7 +1,10 @@
 from ROOT import *
 from DataFormats.FWLite import Events, Handle
 
-inputfiles=["raw_test.root"]
+#inputfiles=["/eos/uscms/store/user/huiwang/ElectroWeakino/Neutrino_E-10_gun_GEN-SIM-DIGI-RAW_MC_v2_94X_mc2017_realistic_v9-v1_6833D6DC-21CE-E711-ABF0-001E677925E8.root"]
+#inputfiles=["root://cmsxrootd.fnal.gov//store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/MC_v2_94X_mc2017_realistic_v9-v1/20052/E06CBB83-1BCE-E711-ABF0-A4BF011259E0.root"]
+#inputfiles=["root://cmsxrootd.fnal.gov//store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/MC_v2_94X_mc2017_realistic_v9-v1/20051/2EA05F08-17CE-E711-8DEC-A4BF0112BC6A.root"]
+inputfiles=["root://cmsxrootd.fnal.gov//store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/MC_v2_94X_mc2017_realistic_v9-v1/20043/183E123B-F0CD-E711-89FD-001E67398633.root"]
 
 # create handle outside of loop
 handle1  = Handle ('vector<reco::GenJet>')
@@ -9,8 +12,10 @@ label1 = ("ak4GenJetsNoNu") #ak8GenJets
 #label = ("prunedGenParticles")
 handle  = Handle ('vector<reco::GenParticle>')
 label = ("genParticles")
+handle2  = Handle ('vector<PileupSummaryInfo>')
+label2 = ("addPileupInfo")
 
-outputfile = "raw_hist.root"
+outputfile = "Neutrino_gun_46_raw_hist.root"
 out_file = TFile(outputfile, 'recreate')
 
 leptons = [11, 13]
@@ -22,6 +27,7 @@ hist_jetpt          = TH1F('hist_jetpt','jetpt',100,0,1000)
 hist_eventht        = TH1F('hist_eventht','eventht',300,0,3000)
 hist_eventhtonlyjets        = TH1F('hist_eventhtonlyjets','eventhtonlyjets',300,0,3000)
 hist_leptoniso   = TH1F('hist_leptoniso','leptoniso_deltar',150,0,15)
+hist_pileup   = TH1F('hist_pileup','pile up',100,0,100)
 
 count=0
 
@@ -78,6 +84,12 @@ for inputfile in inputfiles:
         hist_numjets.Fill(numjets)
         hist_eventht.Fill(visE)
         hist_eventhtonlyjets.Fill(visEonlyjets)
+
+        event.getByLabel(label2, handle2)
+        PileupSummarys = handle2.product()
+
+	for PileupSummary in PileupSummarys:
+		if PileupSummary.getBunchCrossing() == 0: hist_pileup.Fill(PileupSummary.getPU_NumInteractions())
 
         cnt+=1
 

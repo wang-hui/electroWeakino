@@ -1,7 +1,9 @@
 from ROOT import *
 from DataFormats.FWLite import Events, Handle
+import glob
 
-inputfiles=["mini_test.root"]
+
+inputfiles=glob.glob("/eos/uscms/store/user/huiwang/ElectroWeakino/miniAOD_test/mini_mn1_300_mx1_310_*.root")
 
 # create handle outside of loop
 handle1  = Handle ('vector<reco::GenJet>')
