@@ -1,6 +1,6 @@
 # ElectroWeakino miniAOD producer
-This is a git repo to make ntuple from gen-sim to miniAOD
-The step of making nanoAOD from miniAOD and coresponding analyzer can be found the this repo
+This is a git repo to produce miniAOD ntuples from gen-sim  
+The steps of producing nanoAOD ntuples and coresponding analyzer can be found the this repo  
 https://github.com/wang-hui/electroWeakino_NanoAOD
 
 1. setup CMSSW. 2017 samples are produced in 94X
@@ -12,7 +12,7 @@ cmsenv
 
 2. checkout this repo
 ```
-git clone git@github.com:wang-hui/electroWeakino.git
+git clone https://github.com/wang-hui/electroWeakino.git
 cd electroWeakino
 ```
 
