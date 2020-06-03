@@ -1,10 +1,10 @@
 from ROOT import *
 from DataFormats.FWLite import Events, Handle
 
-#inputfiles=["/eos/uscms/store/user/huiwang/ElectroWeakino/Neutrino_E-10_gun_GEN-SIM-DIGI-RAW_MC_v2_94X_mc2017_realistic_v9-v1_6833D6DC-21CE-E711-ABF0-001E677925E8.root"]
+inputfiles=["root://ruhex-osgce.rutgers.edu//store/user/aatkinso/asa178/eos/gensim/n1x1_0318/GENSIM_2017_RPV_Higgsino_oneproc_mn1_100_mx1_110_762.root"]
 #inputfiles=["root://cmsxrootd.fnal.gov//store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/MC_v2_94X_mc2017_realistic_v9-v1/20052/E06CBB83-1BCE-E711-ABF0-A4BF011259E0.root"]
 #inputfiles=["root://cmsxrootd.fnal.gov//store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/MC_v2_94X_mc2017_realistic_v9-v1/20051/2EA05F08-17CE-E711-8DEC-A4BF0112BC6A.root"]
-inputfiles=["root://cmsxrootd.fnal.gov//store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/MC_v2_94X_mc2017_realistic_v9-v1/20043/183E123B-F0CD-E711-89FD-001E67398633.root"]
+#inputfiles=["root://cmsxrootd.fnal.gov//store/mc/RunIISummer17PrePremix/Neutrino_E-10_gun/GEN-SIM-DIGI-RAW/MC_v2_94X_mc2017_realistic_v9-v1/20043/183E123B-F0CD-E711-89FD-001E67398633.root"]
 
 # create handle outside of loop
 handle1  = Handle ('vector<reco::GenJet>')
@@ -12,10 +12,10 @@ label1 = ("ak4GenJetsNoNu") #ak8GenJets
 #label = ("prunedGenParticles")
 handle  = Handle ('vector<reco::GenParticle>')
 label = ("genParticles")
-handle2  = Handle ('vector<PileupSummaryInfo>')
-label2 = ("addPileupInfo")
+#handle2  = Handle ('vector<PileupSummaryInfo>')
+#label2 = ("addPileupInfo")
 
-outputfile = "Neutrino_gun_46_raw_hist.root"
+outputfile = "gen_sim_raw_test.root"
 out_file = TFile(outputfile, 'recreate')
 
 leptons = [11, 13]
@@ -85,11 +85,11 @@ for inputfile in inputfiles:
         hist_eventht.Fill(visE)
         hist_eventhtonlyjets.Fill(visEonlyjets)
 
-        event.getByLabel(label2, handle2)
-        PileupSummarys = handle2.product()
+        #event.getByLabel(label2, handle2)
+        #PileupSummarys = handle2.product()
 
-	for PileupSummary in PileupSummarys:
-		if PileupSummary.getBunchCrossing() == 0: hist_pileup.Fill(PileupSummary.getPU_NumInteractions())
+	#for PileupSummary in PileupSummarys:
+	#	if PileupSummary.getBunchCrossing() == 0: hist_pileup.Fill(PileupSummary.getPU_NumInteractions())
 
         cnt+=1
 

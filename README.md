@@ -5,8 +5,8 @@ https://github.com/wang-hui/electroWeakino_NanoAOD
 
 1. setup CMSSW. 2017 samples are produced in 94X
 ```
-cmsrel CMSSW_9_4_0_patch1
-cd CMSSW_9_4_0_patch1/src
+cmsrel CMSSW_9_4_6_patch1
+cd CMSSW_9_4_6_patch1/src
 cmsenv
 ```
 
