@@ -31,13 +31,14 @@ process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(-1)
 )
 
-f=open(sys.argv[2], "r")
-my_list = f.readlines()
-f.close()
+mn1 = sys.argv[2]
+mx1 = sys.argv[3]
+file_index = sys.argv[4]
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring(my_list),
+    #fileNames = cms.untracked.vstring('file:root://cmseos.fnal.gov//store/user/sthayil/rpvhiggsinos/gensim/testforhui/GENSIM_2017_NanoAODcompatible_oneproc_mn1_300_mx1_310_0.root'),
+    fileNames = cms.untracked.vstring('file:root://cmseos.fnal.gov//store/user/sthayil/rpvhiggsinos/gensim/testforhui/GENSIM_2017_NanoAODcompatible_oneproc_mn1_' + mn1 + '_mx1_' + mx1 + '_' + file_index + '.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -63,6 +64,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(20971520),
     fileName = cms.untracked.string('file:raw_test.root'),
+    #fileName = cms.untracked.string('file:raw_' + 'mn1_' + mn1 + '_mx1_' + mx1 + '_' + file_index + '.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -72,7 +74,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
 # Other statements
 process.mix.digitizers = cms.PSet(process.theDigitizersMixPreMix)
 #process.mixData.input.fileNames = cms.untracked.vstring(['file:root://cmseos.fnal.gov//store/user/huiwang/ElectroWeakino/Neutrino_E-10_gun_GEN-SIM-DIGI-RAW_MC_v2_94X_mc2017_realistic_v9-v1_6833D6DC-21CE-E711-ABF0-001E677925E8.root'])
-process.mixData.input.fileNames = cms.untracked.vstring(['file:root://cmseos.fnal.gov//store/user/huiwang/ElectroWeakino/official_samples/Neutrino_E-10_gun_GEN-SIM-DIGI-RAW_MC_v2_94X_mc2017_realistic_v9-v1_2EA05F08-17CE-E711-8DEC-A4BF0112BC6A.root'])
+process.mixData.input.fileNames = cms.untracked.vstring(['file:root://cmseos.fnal.gov//store/user/huiwang/ElectroWeakino/Neutrino_E-10_gun_GEN-SIM-DIGI-RAW_MC_v2_94X_mc2017_realistic_v9-v1_2EA05F08-17CE-E711-8DEC-A4BF0112BC6A.root'])
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '94X_mc2017_realistic_v10', '')
 

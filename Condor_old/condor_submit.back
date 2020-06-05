@@ -3,11 +3,9 @@ Executable = condor.sh
 Output = /uscms_data/d3/huiwang/condor_temp/huiwang/ElectroWeakino/miniAOD_test/$(Process).out
 Error = /uscms_data/d3/huiwang/condor_temp/huiwang/ElectroWeakino/miniAOD_test/$(Process).err
 Log = /uscms_data/d3/huiwang/condor_temp/huiwang/ElectroWeakino/miniAOD_test/$(Process).log
-transfer_input_files = condor.sh, step1_DIGIPREMIX_S2_DATAMIX_L1_DIGI2RAW_HLT.py, step2_RAW2DIGI_RECO_RECOSIM_EI.py, step3_PAT.py, FileList.tar
+transfer_input_files = condor.sh, step1_DIGIPREMIX_S2_DATAMIX_L1_DIGI2RAW_HLT.py, step2_RAW2DIGI_RECO_RECOSIM_EI.py, step3_PAT.py
 should_transfer_files = YES 
 when_to_transfer_output = ON_EXIT
 x509userproxy = $ENV(X509_USER_PROXY)
-transfer_output_files = _condor_stderr
-
 request_memory = 4000
 
