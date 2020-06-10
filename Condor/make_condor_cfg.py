@@ -2,10 +2,10 @@ import os
 from shutil import copyfile
 from datetime import date
 
-folder_name = "GENSIM_2017_mn1_300_mx1_310"
+folder_name = "GENSIM_2017_mn1_100_mx1_110"
 result_path = "/eos/uscms/store/user/lpcrutgers/huiwang/ElectroWeakino/miniAOD/"
 condor_path = "/uscms_data/d3/huiwang/condor_temp/huiwang/ElectroWeakino/miniAOD/"
-file_list = "../FileList/GENSIM_2017_mn1_300_mx1_310.list"
+file_list = "../FileList/GENSIM_2017_mn1_100_mx1_110_LPC.list"
 tot_jobs = 1000
 
 today = str(date.today())
@@ -13,8 +13,10 @@ folder_name_full = folder_name + "-" + today
 result_path_full = result_path + folder_name_full
 condor_path_full = condor_path + folder_name_full
 
-os.mkdir(result_path_full)
-os.mkdir(condor_path_full)
+try: os.mkdir(result_path_full)
+except OSError: print result_path_full, " already exisit. Make sure you want to save there"
+try: os.mkdir(condor_path_full)
+except OSError: print condor_path_full, " already exisit. Make sure you want to save there"
 
 f = open(file_list, "r")
 my_list = f.readlines()
